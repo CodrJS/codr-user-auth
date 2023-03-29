@@ -47,7 +47,6 @@ app.use((req, res, next) => {
 let server: Server<typeof IncomingMessage, typeof ServerResponse>;
 
 export const start = () => {
-  console.log("server?");
   server = app.listen(PORT, HOST, () => {
     ExpressLogger.info(`Express is starting on ${HOST}:${PORT}`);
     ServiceHealth.handleEvent("express", "connect");

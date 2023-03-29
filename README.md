@@ -85,14 +85,21 @@ and `src/serve.ts` accordingly. Also remove the `src/types/index.d.ts` file.
 
 Necessary variables needed to run:
 
-| Env var                | Location               | Required | Description                                                                             |
-| ---------------------- | ---------------------- | -------- | --------------------------------------------------------------------------------------- |
-| `ENV`                  | `env`                  | `true`   | Deployment envionment - `dev`, `qa`, `stage`, `prod`                                    |
-| `EXPRESS_HOST`         | `express.host`         | `false`  | Express server - listener host                                                          |
-| `EXPRESS_PORT`         | `express.port`         | `false`  | Express server - listener port                                                          |
-| `MONGO_URI`            | `mongo.uri`            | `true`   | MongoDB - server URL, please include username and password to this string               |
-| `KAFKA_BROKERS`        | `kafka.brokers`        | `true`   | Kafka server - comma seperated locations of the kafka brokers                           |
-| `KAFKA_CLIENT_ID`      | `kafka.clientId`       | `true`   | Kafka server - name of the kafka cluster                                                |
-| `KAFKA_CONSUMER_GROUP` | `kafka.consumer.group` | `true`   | Kafka server - consumer group                                                           |
-| `JWT_SECRET`           | `jwt.secret`           | `false`  | JWT - secret, key to decode jwt, must be the same across all services in an environment |
-| `JWT_ISSUER`           | `jwt.issuer`           | `false`  | JWT - issuer, default `codrjs.com`                                                      |
+| Env var                 | Location                | Required | Description                                                                             |
+| ----------------------- | ----------------------- | -------- | --------------------------------------------------------------------------------------- |
+| `ENV`                   | `env`                   | `true`   | Deployment envionment - `dev`, `qa`, `stage`, `prod`                                    |
+| `AWS_REGION`            | `aws.region`            | `false`  | AWS - deployment region                                                                 |
+| `AWS_SES_API_VERSION`   | `aws.ses.api.version`   | `false`  | AWS SES - api version                                                                   |
+| `AWS_SES_ACCESS_KEY`    | `aws.ses.access.key`    | `false`  | AWS SES - IAM access key id                                                             |
+| `AWS_SES_ACCESS_SECRET` | `aws.ses.access.secret` | `false`  | AWS SES - IAM access key secret                                                         |
+| `EMAIL_FROM`            | `email.from`            | `false`  | Email - from address                                                                    |
+| `EMAIL_REPLY_TO`        | `email.replyto`         | `false`  | Email - reply to address(es)                                                            |
+| `EXPRESS_HOST`          | `express.host`          | `false`  | Express server - listener host                                                          |
+| `EXPRESS_PORT`          | `express.port`          | `false`  | Express server - listener port                                                          |
+| `MONGO_URI`             | `mongo.uri`             | `true`   | MongoDB - server URL, please include username and password to this string               |
+| `KAFKA_BROKERS`         | `kafka.brokers`         | `true`   | Kafka server - comma seperated locations of the kafka brokers                           |
+| `KAFKA_CLIENT_ID`       | `kafka.clientId`        | `true`   | Kafka server - name of the kafka cluster                                                |
+| `KAFKA_CONSUMER_GROUP`  | `kafka.consumer.group`  | `true`   | Kafka server - consumer group                                                           |
+| `JWT_ALGORITHM`         | `jwt.algorithm`         | `true`   | JWT - algorithm, default `HS256`                                                        |
+| `JWT_SECRET`            | `jwt.secret`            | `true`   | JWT - secret, key to decode jwt, must be the same across all services in an environment |
+| `JWT_ISSUER`            | `jwt.issuer`            | `true`   | JWT - issuer, default `codrjs.com`                                                      |

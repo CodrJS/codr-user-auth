@@ -1,4 +1,4 @@
-# Kafka Micro-Service Template
+# User Authentication Service
 
 ## Getting Started
 

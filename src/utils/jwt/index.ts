@@ -62,6 +62,7 @@ export function generateToken(payload: User) {
       issuer: config.jwt.issuer,
       algorithm: <jwt.Algorithm>config.jwt.algorithm,
       subject: payload._id as unknown as string,
+      expiresIn: "1h",
     };
     const user = payload.toJSON();
     return jwt.sign(user, config.jwt.secret, signOpts);

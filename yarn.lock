@@ -306,10 +306,10 @@
   dependencies:
     "@ucast/mongo2js" "^1.3.0"
 
-"@codrjs/config@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@codrjs/config/-/config-1.0.0.tgz#90dd9367da77976cc685cf82c344823115753ed5"
-  integrity sha512-KWN7lzW7D7+ysyYYTh+TXf8RZVVMF46umyf19k/ytH3vInDSWSBDiLZ7UaUIIiT1kqAkILYd8FFYUNHBzgZOSg==
+"@codrjs/config@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@codrjs/config/-/config-1.0.5.tgz#d3392c9b13b423dca3612f9c0946434956763069"
+  integrity sha512-e1iX97y44iOoaREw2LwM/HPtFUqo1s9bdH/IckLqTl3s0p1gKiwnVnQQ2ZHCMyagUOQF915y6eMTVlSvlY7jUA==
   dependencies:
     dotenv "^16.0.3"
 
@@ -335,12 +335,13 @@
   dependencies:
     winston "^3.8.2"
 
-"@codrjs/models@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@codrjs/models/-/models-1.0.3.tgz#7be6a70c6f6b44e047d0afb32300d8340588dc23"
-  integrity sha512-hD5yWR2GY1gXdHMMdzwt7xfnqPVr7IPNxrdUo0CArxGabXgeFRPkSboWd2Jyit9erU4BlMl6Gi/lhhgLgeLFCA==
+"@codrjs/models@^1.0.6-patch1":
+  version "1.0.6-patch1"
+  resolved "https://registry.yarnpkg.com/@codrjs/models/-/models-1.0.6-patch1.tgz#24c8573ebebd46b9711af7829f0f766360eae87d"
+  integrity sha512-TzZnyRQMj37JDSMd41y4w7Yt3nWqCFCsFyR64dqu7NTt1k+JLWm5zh4jq4sKhOg/d5TRPMW3I1R2E8fEgX/eRw==
   dependencies:
     "@casl/ability" "^6.3.3"
+    "@codrjs/config" "^1.0.5"
     uuid "^9.0.0"
 
 "@colors/colors@1.5.0":

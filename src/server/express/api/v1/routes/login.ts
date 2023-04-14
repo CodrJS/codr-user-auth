@@ -18,6 +18,7 @@ export const POST: Operation =
         const jwt = generateToken(user);
 
         // create session from session service
+        console.log(req.headers);
 
         // send login email
 

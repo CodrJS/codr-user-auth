@@ -1,12 +1,13 @@
 {
-  "name": "ts-kakfa-template",
+  "name": "codr-user-auth",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "node dist/serve.js",
     "build": "swc ./src -d dist",
-    "build:docker": "docker build -t codr-svc-template .",
-    "test": "jest --config jest.config.json --passWithNoTests --coverage"
+    "test": "jest --config jest.config.json --passWithNoTests --coverage",
+    "docker:build": "docker build -t codr-user-auth .",
+    "docker:run": "docker run --env-file=.env -p 8000:8000 ghcr.io/codrjs/codr-user-auth:latest"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.62",
@@ -25,11 +26,11 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "@codrjs/config": "^1.0.0",
+    "@codrjs/config": "^1.0.5",
     "@codrjs/health": "^1.0.3",
     "@codrjs/kafka": "^1.0.2",
     "@codrjs/logger": "^1.0.0",
-    "@codrjs/models": "^1.0.3",
+    "@codrjs/models": "^1.0.6-patch1",
     "@dylanbulmer/openapi": "^1.0.7",
     "axios": "^1.3.4",
     "body-parser": "^1.20.1",

@@ -1,8 +1,16 @@
 import { Operation } from "@dylanbulmer/openapi/types/Route";
 import { R200 } from "@dylanbulmer/openapi/classes/responses";
-import { Error, Response, User } from "@codrjs/models";
+import {
+  Error,
+  ISession,
+  IUser,
+  Response,
+  Session,
+  User,
+} from "@codrjs/models";
 import UserService from "@/utils/axios/UserService";
 import { generateToken } from "@/utils/jwt";
+import SessionService from "@/utils/axios/SessionService";
 
 export const POST: Operation =
   /* business middleware not expressible by OpenAPI documentation goes here */
@@ -10,25 +18,60 @@ export const POST: Operation =
     // get email
     const { email } = req.body;
 
-    // get user from user service
-    UserService.get(`internal/user?email=${email}`)
-      .then(res => new User(res.data.details.user))
+    Promise.resolve()
+      // get user from user service
+      .then(() => {
+        const user = UserService.get<Response<{ user: IUser }>>(
+          `internal/user?email=${email}`
+        ).then(res => new User(res.data.details.user));
+        return user;
+      })
+      // generate authentication token
       .then(user => {
-        // generate token
         const jwt = generateToken(user);
+        return { user, jwt };
+      })
+      // create session from session service
+      .then(async ({ user, jwt }) => {
+        const ip = (
+          <string>req.headers["x-forwarded-for"] ||
+          req.socket.remoteAddress ||
+          "UNKNOWN"
+        )
+          .split(",")[0]
+          .trim();
 
-        // create session from session service
-        console.log(req.headers);
+        const session = await SessionService.post<
+          Response<{ session: ISession }>
+        >(
+          "session",
+          {},
+          {
+            headers: {
+              "User-Agent": req.headers["user-agent"],
+              "x-forwarded-for": ip,
+              Authorization: `Bearer ${jwt}`,
+            },
+          }
+        ).then(res => new Session(res.data.details.session));
 
-        // send login email
-
+        return { user, jwt, session };
+      })
+      // send login email
+      .then(({ user, jwt, session }) => {
+        /**
+         * @TODO Tech debt: Publish to kafka login event stream stream. Notification domain should pick this up and send out the email.
+         */
+        return { user, jwt, session };
+      })
+      .then(({ user, jwt, session }) => {
         // return with status and sessionId
-
-        res
-          .status(200)
-          .json(
-            new Response<{ jwt: string }>({ message: "OK", details: { jwt } })
-          );
+        res.status(200).json(
+          new Response<{ jwt: string; sessionId: string }>({
+            message: "OK",
+            details: { jwt, sessionId: session._id as unknown as string },
+          })
+        );
       })
       .catch(e => {
         const status = e?.status || 500;

@@ -8,27 +8,6 @@ const isPayload = function isPayload(obj: any): obj is JwtPayload {
 
 export type UserToken = IUser & JwtPayload;
 
-export function verifyToken(token: string) {
-  const bearerRegex = /^Bearer\s/;
-
-  if (token) {
-    if (bearerRegex.test(token)) {
-      token = token.replace(bearerRegex, "");
-    }
-
-    try {
-      const decoded = jwt.verify(token, config.jwt.secret, {
-        issuer: config.jwt.issuer,
-      });
-      return decoded as UserToken;
-    } catch (e) {
-      throw new Error({ status: 401, message: "Could not verify the JWT." });
-    }
-  } else {
-    throw new Error({ status: 400, message: "JWT is missing." });
-  }
-}
-
 /**
  * @TODO Finish writing the refresh function.
  */
